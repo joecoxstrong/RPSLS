@@ -1,7 +1,4 @@
-# Class Human:
-#   def __init__ (self, gesture):
-#     self.name = name
-#     self.gesture = gesture
+
 
 from player import Player
 
@@ -15,9 +12,3 @@ class Human(Player):
 
   
         
-
-
-human = Human(Player)
-print(human.name)
-# chosen_number = human.choose_gesture()
-# print(human.gesture[chosen_number])
