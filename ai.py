@@ -1,17 +1,13 @@
-# Class Human:
-#   def __init__ (self, gesture):
-#     self.name = name
-#     self.gesture = gesture
 
 from player import Player
 import random
 
 
-class Human(Player):
+class AI(Player):
     def __init__(self, name):
         super().__init__(name)
         self.score = 0
-        self.name = name
+        self.name = 'Computer'
 
     def choose_gesture(self):
         choose_index = random.randint(0,4)
@@ -22,3 +18,4 @@ class Human(Player):
 ai = AI(Player)
 random_number = ai.choose_gesture()
 print(ai.gesture[random_number])
+# print(gesture[self.chosen_gesture])
