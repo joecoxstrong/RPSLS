@@ -1,0 +1,262 @@
+mport random
+import time
+from player import Player
+from ai import AI 
+from human import Human
+
+class Game():
+    def __init__(self):
+        self.game = 'Rock'
+
+    def run_game_computer(self):
+        self.player01 = Human('player one')
+        self.player02 = AI('player two')
+        self.display_greeting()
+        self.comp_match()
+        self.display_winner()
+    
+    
+    def run_game(self):
+        self.player01 = Human('player one')
+        self.player02 = Human('player two')
+        self.display_greeting()
+        self.match()
+        self.display_winner()
+        
+ 
+    def display_greeting(self):
+        print("WELCOME! LIVE LONG AND PROSPER! LET'S GET READY TO PLAY 'ROCK, PAPER, SCISSORS, LIZARD, SPOCK'!")
+        time.sleep(1)
+        print('Here are the rules:\n')
+        time.sleep(1)
+        print('Scissors cuts Paper\n')
+        time.sleep(1)
+        print('Paper covers Rock\n') 
+        time.sleep(1)
+        print('Rock crushes Lizard\n')
+        time.sleep(1)
+        print('Lizard poisons Spock\n')
+        time.sleep(1)
+        print('Spock smashes Scissors\n')
+        time.sleep(1)
+        print('Scissors decapitates Lizard\n')
+        time.sleep(1)
+        print('Lizard eats Paper\n')
+        time.sleep(1)
+        print('Paper disproves Spock\n')
+        time.sleep(1)
+        print('Spock vaporizes Rock\n')
+        time.sleep(1)
+        print('(and as it always has) Rock crushes Scissors")\n')
+        time.sleep(1)
+        
+    def comp_match(self):
+        while self.player02.score != 2 and self.player01.score != 2:
+            comp_player = self.comp_player_choice()
+            comp_random = self.comp_choice()
+            self.compare_gestures(comp_player, comp_random)
+        
+        else:
+            self.display_winner()
+            
+            
+
+    def match(self):
+        while self.player02.score != 2 and self.player01.score != 2:
+            self.player_two_choice()
+        
+        else:
+            self.display_winner()
+            exit
+            
+            
+
+    def comp_player_choice(self):
+        while True:
+            try:
+                print(f'The current score is: {self.player01.name}  {self.player01.score}               {self.player02.name} {self.player02.score}')
+                print(f'(0)  {self.player01.gesture[0]}   (1) {self.player01.gesture[1]}  (2) {self.player01.gesture[2]} (3)  {self.player01.gesture[3]}     (4) {self.player01.gesture[4]} ')
+                play_choice_vs_comp = int(input('Please select your gesture:  '))
+            except:
+                ValueError
+                print('invalid input please try again\n')
+                continue
+               
+               
+            if play_choice_vs_comp > 4:
+                print ('Sorry, only numbers 0-4 please\n')
+                continue
+                
+             
+            else:
+                return play_choice_vs_comp
+                break
+                
+    def comp_choice(self):
+            comp_pick = random.randint(0,4)
+            return comp_pick
+
+    def player_one_choice(self):
+        while True:
+            try:
+                print(f'The current score is: {self.player01.name}  {self.player01.score}               {self.player02.name} {self.player02.score}')
+                print(f'(0)  {self.player01.gesture[0]}   (1) {self.player01.gesture[1]}  (2) {self.player01.gesture[2]}  (3) {self.player01.gesture[3]}     (4) {self.player01.gesture[4]} ')
+                player_one_sel = int(input('Please select your gesture:  '))
+            except:
+                ValueError
+                print('invalid input please try again\n')
+                continue
+                
+               
+            if player_one_sel > 4:
+                print ('Sorry, only numbers 0-4 please\n')
+                continue
+               
+              
+            else:
+                return player_one_sel
+                break
+               
+    def player_two_choice(self): 
+        while True:   
+            try:
+                print(f'The current score is: {self.player01.name}  {self.player01.score}               {self.player02.name} {self.player02.score}')
+                print(f'(0)  {self.player01.gesture[0]}   (1) {self.player01.gesture[1]}  (2) {self.player01.gesture[2]} (3)  {self.player01.gesture[3]}     (4) {self.player01.gesture[4]} ')
+                player_two_sel = int(input('Please select your gesture:  '))
+            except:
+                ValueError
+                print('invalid input please try again\n')
+                continue
+             
+                
+            if player_two_sel > 4:
+                print ('Sorry, only numbers 0-4 please\n')
+                continue
+              
+              
+            else:
+                player_one_test = self.player_one_choice()
+                self.compare_gestures(player_two_sel, player_one_test)
+                break
+           
+    def compare_gestures(self, gesture_01, gesture_02):
+        gesture_a = self.player01.gesture[gesture_01]
+        gesture_b = self.player02.gesture[gesture_02]
+        print(f'{self.player01.name} chooses {gesture_a}')
+        time.sleep(2)
+        print(f'{self.player02.name} chooses {gesture_b}')
+        time.sleep(2)
+       
+        if gesture_b == gesture_a and self.player02.name == 'Computer':
+            print('It\'s a tie! Please try again!\n')
+            print (gesture_b)
+            self.comp_match()
+
+        elif gesture_b == gesture_a and self.player02.name != 'Computer':
+            print('It\'s a tie! Please try again!\n')
+            print (gesture_b)
+            self.match()
+
+        elif 'Rock' in gesture_a:
+                if 'Paper' in gesture_b: 
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+                elif 'Spock' in gesture_b:
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                else:
+                    print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
+                    time.sleep(2)
+                    self.player01.score +=1
+
+        elif 'Paper' in gesture_a:
+                if 'Lizard' in gesture_b: 
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                elif 'Scissors' in gesture_b:
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                else:
+                    print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
+                    time.sleep(2)
+                    self.player01.score +=1
+
+        elif 'Scissors' in gesture_a:
+                if 'Rock' in gesture_b: 
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                elif 'Spock' in gesture_b:
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                else:
+                    print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
+                    time.sleep(2)
+                    self.player01.score +=1
+
+        elif 'Lizard' in gesture_a:
+                if 'Rock' in gesture_b: 
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                elif 'Scissors' in gesture_b:
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    
+                else:
+                    print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
+                    time.sleep(2)
+                    self.player01.score +=1
+
+        elif 'Spock' in gesture_a:
+                if 'Paper' in gesture_b: 
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                elif 'Lizard' in gesture_b:
+                    print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
+                    time.sleep(2)
+                    self.player02.score +=1
+
+                else:
+                    print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
+                    time.sleep(2)
+                    self.player01.score +=1
+
+    def display_winner(self):
+        if self.player01.score == 2:
+            for i in range(1):
+                print(f'{self.player01.name} is the winner!!!!!\n')
+                time.sleep(1) 
+                break
+
+        else:
+            for i in range(1): 
+                print(f'{self.player02.name} is the winner!!!!!\n') 
+                time.sleep(1)
+                break
+            
+        
+    
+    
+    
+
+
+
+   
+
+
+
+        
