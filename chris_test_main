@@ -1,0 +1,26 @@
+from player import Player
+import random
+from human import Human
+from ai import AI
+from game import Game
+
+
+while True:
+    try:    
+        game_type = int(input('Which game would you like to play? For Human vs Human, Press (0), for Human vs Computer, Press (1) '))
+    except ValueError:
+         print('not a valid selection please try again')
+         continue
+
+    game01 = Game()
+    if game_type > 1 :
+        print('Sorry, only 0 or 1 please') 
+        continue
+    
+    elif game_type == 0:
+        game01.run_game()
+       
+    else:   
+        game01.run_game_computer()
+
+        
