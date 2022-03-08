@@ -1,4 +1,4 @@
-mport random
+import random
 import time
 from player import Player
 from ai import AI 
@@ -47,7 +47,7 @@ class Game():
         time.sleep(1)
         print('Spock vaporizes Rock\n')
         time.sleep(1)
-        print('(and as it always has) Rock crushes Scissors")\n')
+        print('(and as it always has) Rock crushes Scissors\n')
         time.sleep(1)
         
     def comp_match(self):
