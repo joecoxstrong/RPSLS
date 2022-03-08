@@ -62,7 +62,7 @@ class Game():
             comp_player1 = self.human.choose_gesture()
             comp_player2 = self.human.choose_gesture()
             self.compare_gestures(comp_player1, comp_player2)
-             
+            # self.check_for_tie(comp_player1,comp_player2)
 
     def computer_game(self):
         print('You are playing against the computer.')
@@ -81,6 +81,18 @@ class Game():
         # else:
             # self.display_winner()
             # break
+    # def check_for_tie(self,check_one, check_two):
+    #     if check_two == check_one and self.player02.name == 'Computer':
+    #             print('It\'s a tie! Please try again!\n')
+    #             # print (gesture_b)
+    #             self.computer_game()
+                
+    #     elif check_two == check_one and self.player02.name != 'Computer':
+    #             print('It\'s a tie! Please try again!\n')
+    #             # print (gesture_b)
+    #             self.human_game()
+                
+
     def compare_gestures(self,gesture_01,gesture_02):
         gesture_a = self.player01.gestures[gesture_01]
         gesture_b = self.player02.gestures[gesture_02]
@@ -92,13 +104,13 @@ class Game():
             if gesture_b == gesture_a and self.player02.name == 'Computer':
                 print('It\'s a tie! Please try again!\n')
                 # print (gesture_b)
-                # self.computer_game()
-                continue
+                self.computer_game()
+                # continue
             elif gesture_b == gesture_a and self.player02.name != 'Computer':
                 print('It\'s a tie! Please try again!\n')
                 # print (gesture_b)
-                # self.human_game()
-                continue
+                self.human_game()
+                # continue
             else:
                 break
                 
