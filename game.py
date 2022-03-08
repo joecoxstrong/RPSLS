@@ -1,4 +1,4 @@
-from player import Player
+
 from ai import AI 
 from human import Human
 import time
@@ -10,21 +10,39 @@ class Game():
         self.player_one_choice=0
         self.player_two_choice=0
         self.computer_choice=0
-        # pass
+        
 
     def run_game(self):
         self.display_greeting()
         self.game_choice()
-        # self.human_game()
-        # self.computer_game()
-        
         self.display_winner()
         
 
     def display_greeting(self):
         print("WELCOME! LIVE LONG AND PROSPER! LET'S GET READY TO PLAY 'ROCK, PAPER, SCISSORS, LIZARD, SPOCK'!")
-        print("Here are the rules:\nScissors cuts Paper\nPaper covers Rock\nRock crushes Lizard\nLizard poisons Spock\nSpock smashes Scissors\nScissors decapitates Lizard\nLizard eats Paper\nPaper disproves Spock\nSpock vaporizes Rock\n(and as it always has) Rock crushes Scissors")
-
+        time.sleep(1)
+        print('Here are the rules:\n')
+        time.sleep(1)
+        print('Scissors cuts Paper\n')
+        time.sleep(1)
+        print('Paper covers Rock\n') 
+        time.sleep(1)
+        print('Rock crushes Lizard\n')
+        time.sleep(1)
+        print('Lizard poisons Spock\n')
+        time.sleep(1)
+        print('Spock smashes Scissors\n')
+        time.sleep(1)
+        print('Scissors decapitates Lizard\n')
+        time.sleep(1)
+        print('Lizard eats Paper\n')
+        time.sleep(1)
+        print('Paper disproves Spock\n')
+        time.sleep(1)
+        print('Spock vaporizes Rock\n')
+        time.sleep(1)
+        print('(and as it always has) Rock crushes Scissors\n')
+        time.sleep(1)
     def game_choice(self):
         while True:
             try:    
@@ -44,12 +62,9 @@ class Game():
             else:  
                 print('Sorry, only 1 or 2 please') 
         
-        
-            
-    
 
     def human_game(self):
-        print('You are playing against another human.')
+        
         self.player01 = Human() 
         player_01 = self.player01.create_players()
         
@@ -62,10 +77,10 @@ class Game():
             comp_player1 = self.human.choose_gesture()
             comp_player2 = self.human.choose_gesture()
             self.compare_gestures(comp_player1, comp_player2)
-            # self.check_for_tie(comp_player1,comp_player2)
+            
 
     def computer_game(self):
-        print('You are playing against the computer.')
+        
         self.player01 = Human() 
         player_01 = self.player01.create_players()
         
@@ -77,21 +92,9 @@ class Game():
             comp_player = self.human.choose_gesture()
             comp_random = self.ai.ai_gesture()
             self.compare_gestures(comp_player, comp_random)
-        
-        # else:
-            # self.display_winner()
-            # break
-    # def check_for_tie(self,check_one, check_two):
-    #     if check_two == check_one and self.player02.name == 'Computer':
-    #             print('It\'s a tie! Please try again!\n')
-    #             # print (gesture_b)
-    #             self.computer_game()
-                
-    #     elif check_two == check_one and self.player02.name != 'Computer':
-    #             print('It\'s a tie! Please try again!\n')
-    #             # print (gesture_b)
-    #             self.human_game()
-                
+            print(self.player01.score)
+            print(self.player02.score)
+    
 
     def compare_gestures(self,gesture_01,gesture_02):
         gesture_a = self.player01.gestures[gesture_01]
@@ -100,22 +103,12 @@ class Game():
         time.sleep(2)
         print(f'{self.player02.name} chooses {gesture_b}')
         time.sleep(2)
-        while True:
-            if gesture_b == gesture_a and self.player02.name == 'Computer':
-                print('It\'s a tie! Please try again!\n')
-                # print (gesture_b)
-                self.computer_game()
-                # continue
-            elif gesture_b == gesture_a and self.player02.name != 'Computer':
-                print('It\'s a tie! Please try again!\n')
-                # print (gesture_b)
-                self.human_game()
-                # continue
-            else:
-                break
-                
-
-        if 'Rock' in gesture_a:
+        
+        if gesture_b == gesture_a:
+            print('It\'s a tie! Please try again!\n')
+            self.player01.score += 0       
+            
+        elif 'Rock' in gesture_a:
             if 'Paper' in gesture_b: 
                 print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
                 time.sleep(2)
@@ -136,7 +129,7 @@ class Game():
                 time.sleep(2)
                 self.player02.score +=1
 
-            elif 'Scissors' in gesture_b:
+            elif 'Scissor' in gesture_b:
                 print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
                 time.sleep(2)
                 self.player02.score +=1
@@ -168,10 +161,10 @@ class Game():
                     time.sleep(2)
                     self.player02.score +=1
 
-                elif 'Scissors' in gesture_b:
+                elif 'Scissor' in gesture_b:
                     print(f'{gesture_b} beats {gesture_a}, {self.player02.name} wins!\n')
                     time.sleep(2)
-                    
+                    self.player02.score =+1
                 else:
                     print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
                     time.sleep(2)
@@ -192,31 +185,7 @@ class Game():
                     print(f'{gesture_a} beats {gesture_b}, {self.player01.name} wins!\n')
                     time.sleep(2)
                     self.player01.score +=1
-    # def match(self):
-    #     if Game.game_choice(self) == 1:
-    #         Game.human_game(self)
-
-    #     elif Game.game_choice(self) == 2:
-    #         Game.computer_game(self)
-
-    # def player_one_choice(self):
-    #     pass
-
-    # def player_two_choice(self):
-    #     pass
-
-    # def computer_choice(self):
-    #     pass    
-
-    # def human_choose_gesture(self):
-    #     choose_index = int(input(f'{self.name}, select a gesture. '))
-    #     return choose_index
-
-
-    # def computer_choose_gesture(self):
-    #     choose_index = random.randint(0,4)
-    #     return choose_index
-
+  
 
 
     def display_winner(self):
@@ -228,6 +197,3 @@ class Game():
             
             
 
-# game = Game()
-# print(game.human.name)
-        
